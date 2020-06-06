@@ -89,6 +89,19 @@ class Comment(db.Model):
     date_time = Column(DateTime, nullable=False, default=datetime.datetime.utcnow)
 
     '''
+    format()
+        Returns formatted comments
+    '''
+    def format(self):
+        return {
+            'id': self.id,
+            'article_id': self.article_id,
+            'author': self.author,
+            'content': self.content,
+            'date_time': self.date_time
+        }
+
+    '''
     insert()
         inserts a comment into a database
         EXAMPLE
