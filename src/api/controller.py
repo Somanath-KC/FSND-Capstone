@@ -1,5 +1,6 @@
 from flask import Blueprint, abort, jsonify, request
 from ..models import db, Article, Comment
+from ..auth.handler import requires_auth
 
 API = Blueprint('API', __name__)
 
