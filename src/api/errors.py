@@ -1,5 +1,6 @@
 from .controller import API
 from flask import jsonify
+from ..auth.handler import AuthError
 
 
 @API.errorhandler(404)
@@ -25,3 +26,14 @@ def api_internal_error(error):
         'error': 500,
         'message': 'API internal error'
     }), 500
+
+# Refrence: 
+#          https://flask.palletsprojects.com/en/1.1.x/patterns/apierrors/#registering-an-error-handler
+@API.errorhandler(AuthError)
+def auth_errors(auth_error):
+    error = auth_error.error
+    return jsonify({
+        'success': False,
+        'error': error.get('error'),
+        'message': error.get('message')
+    }), auth_error.status_code
