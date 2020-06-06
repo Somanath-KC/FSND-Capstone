@@ -64,7 +64,6 @@ def check_permissions(permission, payload):
 #  Verify JWT
 def verify_decode_jwt(token):
     url = 'https://{}/.well-known/jwks.json'.format(AUTH0_DOMAIN)
-    print(url)
     json_url = urlopen(url)
     jwks = json.loads(json_url.read())
 
