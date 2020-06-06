@@ -6,12 +6,16 @@ API = Blueprint('API', __name__)
 # API Error handling
 from . import errors
 
+
+# API END POINTS START
+
 # This endpoint checks api availability
 @API.route('/', methods=["GET"])
 def api_index():
     return jsonify({
         'success': True
     })
+
 
 # GET Articles
 # This endpoint fetches all available articles
@@ -25,3 +29,6 @@ def get_articles():
         'success': True,
         'Articles': articles_data
     })
+
+
+
