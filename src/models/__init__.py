@@ -95,7 +95,6 @@ class Comment(db.Model):
     def format(self):
         return {
             'id': self.id,
-            'article_id': self.article_id,
             'author': self.author,
             'content': self.content,
             'date_time': self.date_time
