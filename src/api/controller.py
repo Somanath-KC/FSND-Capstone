@@ -147,7 +147,9 @@ def delete_article(payload, article_id):
         'success': True
     })
 
-
+# GET COMMENTS
+# This returns all the comments for given article id
+# Comment were only visible to subscribers and authors
 @API.route('/articles/<int:article_id>/comments', methods=["GET"])
 @requires_auth('read:comment')
 def read_comments_of_article(payload, article_id):
