@@ -35,7 +35,8 @@ def get_articles():
 # GET Articles by id
 # This endpoint fetches Article with given id.
 @API.route('/articles/<int:article_id>', methods=["GET"])
-def get_article_by_id(article_id):
+@requires_auth('read:article')
+def get_article_by_id(payload, article_id):
 
     articles_data = Article.query.get(article_id)
 
