@@ -67,6 +67,7 @@ def post_article(payload):
     except Exception as e:
         # Print statement for debugging
         print(e)
+        db.session.rollback()
         abort(422)
 
     return jsonify({
@@ -109,6 +110,7 @@ def update_article(payload):
     except Exception as e:
         #  Debugging Print Statement
         print(e)
+        db.session.rollback()
         abort(422)
 
     return jsonify({
@@ -138,6 +140,7 @@ def delete_article(payload, article_id):
         article.delete()
     except Exception as e:
         print(e)
+        db.session.rollback()
         abort(422)
     
     return jsonify({
