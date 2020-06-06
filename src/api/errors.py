@@ -2,6 +2,13 @@ from .controller import API
 from flask import jsonify
 from ..auth.handler import AuthError
 
+@API.errorhandler(400)
+def api_bad_request(error):
+    return jsonify({
+        'success': False,
+        'error': 400,
+        'message': 'Bad Request'
+    }), 400
 
 @API.errorhandler(404)
 def api_resource_not_found(error):
@@ -18,6 +25,14 @@ def api_method_not_allowed(error):
         'error': 405,
         'message': 'Method not allowed'
     }), 405
+
+@API.errorhandler(422)
+def api_method_not_allowed(error):
+    return jsonify({
+        'success': False,
+        'error': 422,
+        'message': 'Entity Unprocessable'
+    }), 422
 
 @API.errorhandler(500)
 def api_internal_error(error):
