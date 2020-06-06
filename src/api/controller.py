@@ -54,11 +54,11 @@ def get_article_by_id(payload, article_id):
 # REQUEST BODY: TYPE-> JSON
 #          REQUIRED -> title, content
 @API.route('/articles', methods=["POST"])
-def post_article():
+@requires_auth('post:article')
+def post_article(payload):
 
     data = request.get_json()
-    data['author'] = 'somanath'
-
+    data['author'] = payload.get('sub')
 
     new_article = Article(**data)
     
@@ -80,7 +80,8 @@ def post_article():
 #  REQUEST BODY: TYPE -> JSON
 #          REQUIRED -> id, content 
 @API.route('/articles', methods=['PATCH'])
-def update_article():
+@requires_auth('update:article')
+def update_article(payload):
 
     data = request.get_json()
 
@@ -95,6 +96,10 @@ def update_article():
 
     #  Checks if validity of article id
     if not article:
+        abort(400)
+
+    # Prevents authors from updating other author's articles
+    if not payload.get('sub') == article.author:
         abort(400)
 
     article.content = article_new_content
