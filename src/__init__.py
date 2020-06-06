@@ -13,6 +13,7 @@ def create_app(test_config=None):
     app.config.from_pyfile('../config.py')
     db.init_app(app)
     
+    
     cors = CORS(app, resources={r"*": {"origin": "*"}})
 
     # Add cors headers
@@ -26,7 +27,7 @@ def create_app(test_config=None):
 
     @app.route('/')
     def main():
-      return "E-Magazine Site."
+        return "E-Magazine Site."
 
     return app
 
