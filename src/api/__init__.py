@@ -31,6 +31,22 @@ def get_articles():
     })
 
 
+# GET Articles by id
+# This endpoint fetches Article with given id.
+@API.route('/articles/<int:article_id>', methods=["GET"])
+def get_article_by_id(article_id):
+
+    articles_data = Article.query.get(article_id)
+
+    if not articles_data:
+        abort(404)
+
+    return jsonify({
+        'success': True,
+        'Article': [articles_data.long()]
+    })
+
+
 # POST Article
 # This creates new article in database
 # REQUEST BODY: TYPE-> JSON
