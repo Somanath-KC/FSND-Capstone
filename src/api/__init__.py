@@ -54,4 +54,41 @@ def post_article():
         'success': True,
         'Articles': [new_article.long()]
     }), 201 
+
+
+#  Update Article
+#  This endpoint updates the existing article
+#  REQUEST BODY: TYPE -> JSON
+#          REQUIRED -> id, content 
+@API.route('/articles', methods=['PATCH'])
+def update_article():
+
+    data = request.get_json()
+
+    article_id = data.get('id')
+    article_new_content = data.get('content')
+    
+    # Checks if validity  of request body 
+    if not (article_id and article_new_content):
+        abort(400)
+
+    article = Article.query.get(article_id)
+
+    #  Checks if validity of article id
+    if not article:
+        abort(400)
+
+    article.content = article_new_content
+
+    try:
+        article.update()
+    except Exception as e:
+        #  Debugging Print Statement
+        print(e)
+        abort(422)
+
+    return jsonify({
+        'success': True,
+        'Articles': [article.long()]
+    })
     
