@@ -121,13 +121,18 @@ def update_article(payload):
 # Removes an article from database with given id
 # Return True if successfully deleted
 @API.route('/articles/<int:article_id>', methods=["DELETE"])
-def delete_article(article_id):
+@requires_auth('delete:article')
+def delete_article(payload, article_id):
 
     article = Article.query.get(article_id)
 
     # Checks if article exists with given id.
     if not article:
         abort(404)
+    
+    # Prevents deleting others articles
+    if not payload.get('sub') == article.author:
+        abort(400)
 
     try:
         article.delete()
