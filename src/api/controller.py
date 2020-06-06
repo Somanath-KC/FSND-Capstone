@@ -163,3 +163,44 @@ def read_comments_of_article(payload, article_id):
         'Article_id': article.id,
         'comments': [item.format() for item in comments]
     })
+
+#  POST COMMENT
+#       REQUIRES BODY --> JSON
+#       BODY --> {content: "Some text"}, 
+#       Returns all comments with new one.
+@API.route('/articles/<int:article_id>/comments', methods=["POST"])
+@requires_auth('post:comment')
+def post_new_comment(payload, article_id):
+
+    article = Article.query.get(article_id)
+
+    # if passed invalid article id returns 404
+    if not article:
+        abort(404)
+
+    comment_data = request.get_json().get('content')
+
+    if not comment_data:
+        abort(400)
+
+    new_comment = Comment( article_id = article_id,
+                           content = comment_data,
+                           author = payload.get('sub') 
+                         )
+    
+    try:
+        new_comment.insert()
+    except Exception as e:
+        # Print Statement for debugging
+        print(e)
+        db.session.rollback()
+        abort(422)
+    
+    return jsonify({
+        'success': True,
+        'Article': article.title,
+        'Article_id': article.id,
+        'comments': [item.format() for item in Comment.query.all()]
+    })
+
+    
