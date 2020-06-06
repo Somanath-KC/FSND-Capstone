@@ -147,7 +147,9 @@ def delete_article(payload, article_id):
         'success': True
     })
 
-
+# GET COMMENTS
+# This returns all the comments for given article id
+# Comment were only visible to subscribers and authors
 @API.route('/articles/<int:article_id>/comments', methods=["GET"])
 @requires_auth('read:comment')
 def read_comments_of_article(payload, article_id):
@@ -206,7 +208,24 @@ def post_new_comment(payload, article_id):
         'comments': [item.format() for item in article.comments]
     })
 
-        # Prevents deleting other's comments
+
+#  DELETE COMMENT
+#       REQUIRE BODY --> JSON
+#       EXAMPLE BODY --> { 'id': 1 }, where id is comment id
+#       to be deleted    
+@API.route('/articles/<int:article_id>/comments', methods=["DELETE"])
+@requires_auth('delete:comment')
+def delete_comment(payload, article_id):
+    article = Article.query.get(article_id)
+
+    comment_id = request.get_json().get('id')
+    comment = Comment.query.get(comment_id)
+
+    # if passed invalid article and comment id returns 404
+    if not (article and comment):
+        abort(404)
+
+    # Prevents deleting other's comments
     if not (comment.author == payload.get('sub')):
         # The author of article have right to delete any comment 
         # on his article only.
