@@ -92,3 +92,25 @@ def update_article():
         'Articles': [article.long()]
     })
     
+
+# Delete Article
+# Removes an article from database with given id
+# Return True if successfully deleted
+@API.route('/articles/<int:article_id>', methods=["DELETE"])
+def delete_article(article_id):
+
+    article = Article.query.get(article_id)
+
+    # Checks if article exists with given id.
+    if not article:
+        abort(404)
+
+    try:
+        article.delete()
+    except Exception as e:
+        print(e)
+        abort(422)
+    
+    return jsonify({
+        'success': True
+    })
