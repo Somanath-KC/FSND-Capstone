@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 
 from .api import API
-from .models import db
+from .models import db, Article, Comment
 
 
 def create_app(test_config=None):
@@ -15,7 +15,6 @@ def create_app(test_config=None):
     # Databse initialization
     db.app = app
     db.init_app(app)
-    db.create_all()
 
     # CORS Configuration
     cors = CORS(app, resources={r"*": {"origin": "*"}})

@@ -1,14 +1,19 @@
-from sqlalchemy import Column, String, Integer, DateTime
+from sqlalchemy import Column, String, Integer, DateTime, ForeignKey
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
 class Article(db.Model):
+    __tablename__ = "Article"
+
     id = Column(Integer, primary_key=True)
     author = Column(String(), nullable=False)
     title = Column(String(), nullable=False)
     publish_date_time = Column(DateTime,  nullable=False)
     content = Column(String(),  nullable=False)
+
+    # Relations ships one-many relation
+    comments = db.relationship('Comment', backref="Article", cascade="all,delete", lazy=True)
 
     '''
     short()
@@ -59,11 +64,12 @@ class Article(db.Model):
 
 
 class Comment(db.Model):
+    __tablename__ = "Comment"
     id = Column(Integer, primary_key=True)
-    article_id = Column(Integer, nullable=False)
+    article_id = Column(Integer, ForeignKey('Article.id'), nullable=False)
     author = Column(String(), nullable=False)
     content = Column(String(256), nullable=False)
-    data_time = Column(DateTime)
+    date_time = Column(DateTime)
 
     '''
     insert()
