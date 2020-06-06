@@ -143,3 +143,23 @@ def delete_article(payload, article_id):
     return jsonify({
         'success': True
     })
+
+
+@API.route('/articles/<int:article_id>/comments', methods=["GET"])
+@requires_auth('read:comment')
+def read_comments_of_article(payload, article_id):
+
+    article = Article.query.get(article_id)
+
+    # if passed invalid article id returns 404
+    if not article:
+        abort(404)
+
+    comments = article.comments
+
+    return jsonify({
+        'success': True,
+        'Article': article.title,
+        'Article_id': article.id,
+        'comments': [item.format() for item in comments]
+    })
