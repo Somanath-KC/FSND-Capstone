@@ -59,6 +59,7 @@ def post_article():
     data = request.get_json()
     data['author'] = 'somanath'
 
+
     new_article = Article(**data)
     
     try:
