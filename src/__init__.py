@@ -6,6 +6,7 @@ from flask_cors import CORS
 from .api import API
 from .models import db
 
+
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__)
@@ -30,6 +31,7 @@ def create_app(test_config=None):
     return app
 
 APP = create_app()
+from . import errors
 
 if __name__ == '__main__':
     APP.run(host='0.0.0.0', port=8080, debug=True)
