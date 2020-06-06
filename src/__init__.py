@@ -13,6 +13,7 @@ def create_app(test_config=None):
     app.config.from_pyfile('../config.py')
 
     # Databse initialization
+    db.app = app
     db.init_app(app)
     db.create_all()
 
