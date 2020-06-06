@@ -1,5 +1,5 @@
-from flask import Blueprint, abort, jsonify
-from ..models import Article, Comment
+from flask import Blueprint, abort, jsonify, request
+from ..models import db, Article, Comment
 
 API = Blueprint('API', __name__)
 
@@ -31,4 +31,27 @@ def get_articles():
     })
 
 
+# POST Article
+# This creates new article in database
+# REQUEST BODY: TYPE-> JSON
+#          REQUIRED -> title, content
+@API.route('/articles', methods=["POST"])
+def post_article():
 
+    data = request.get_json()
+    data['author'] = 'somanath'
+
+    new_article = Article(**data)
+    
+    try:
+        new_article.insert()
+    except Exception as e:
+        # Print statement for debugging
+        print(e)
+        abort(422)
+
+    return jsonify({
+        'success': True,
+        'Articles': [new_article.long()]
+    }), 201 
+    

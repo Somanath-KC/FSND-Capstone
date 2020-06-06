@@ -1,3 +1,4 @@
+import datetime
 from sqlalchemy import Column, String, Integer, DateTime, ForeignKey
 from flask_sqlalchemy import SQLAlchemy
 
@@ -26,6 +27,22 @@ class Article(db.Model):
             'title': self.title,
             'publish_date_time': self.publish_date_time
         }
+    
+    '''
+    long()
+        long form representation of the Article model
+    '''
+    def long(self):
+        
+        return {
+            'id': self.id,
+            'title': self.title,
+            'publish_date_time': self.publish_date_time,
+            'author': self.author,
+            'content': self.content
+        }
+    
+    
 
     '''
     insert()
@@ -69,7 +86,7 @@ class Comment(db.Model):
     article_id = Column(Integer, ForeignKey('Article.id'), nullable=False)
     author = Column(String(), nullable=False)
     content = Column(String(256), nullable=False)
-    date_time = Column(DateTime)
+    date_time = Column(DateTime, nullable=False, default=datetime.datetime.utcnow)
 
     '''
     insert()
