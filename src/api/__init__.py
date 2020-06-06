@@ -1,4 +1,5 @@
 from flask import Blueprint, abort, jsonify
+from ..models import Article, Comment
 
 API = Blueprint('API', __name__)
 
