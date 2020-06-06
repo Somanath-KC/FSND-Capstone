@@ -1,4 +1,4 @@
-from . import API
+from .controller import API
 from flask import jsonify
 
 
