@@ -1,5 +1,4 @@
 from flask import Blueprint, abort, jsonify
-from ..models import Article, Comment
 
 API = Blueprint('API', __name__)
 
@@ -7,6 +6,7 @@ API = Blueprint('API', __name__)
 from . import errors
 
 @API.route('/', methods=["GET"])
+# This endpoint checks api availability
 def api_index():
     return jsonify({
         'success': True
