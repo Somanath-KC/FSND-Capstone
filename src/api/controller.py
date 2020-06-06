@@ -203,7 +203,7 @@ def post_new_comment(payload, article_id):
         'success': True,
         'Article': article.title,
         'Article_id': article.id,
-        'comments': [item.format() for item in Comment.query.all()]
+        'comments': [item.format() for item in article.comments]
     })
 
     
