@@ -9,7 +9,7 @@ class Article(db.Model):
     id = Column(Integer, primary_key=True)
     author = Column(String(), nullable=False)
     title = Column(String(), nullable=False)
-    publish_date_time = Column(DateTime,  nullable=False)
+    publish_date_time = Column(DateTime,  nullable=False, default=datetime.datetime.utcnow)
     content = Column(String(),  nullable=False)
 
     # Relations ships one-many relation
