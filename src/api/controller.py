@@ -7,7 +7,6 @@ API = Blueprint('API', __name__)
 # API Error handling
 from . import errors
 
-
 # API END POINTS START
 
 # This endpoint checks api availability
@@ -61,7 +60,6 @@ def post_article(payload):
     data['author'] = payload.get('sub')
 
     new_article = Article(**data)
-    
     try:
         new_article.insert()
     except Exception as e:
@@ -130,8 +128,7 @@ def delete_article(payload, article_id):
 
     # Checks if article exists with given id.
     if not article:
-        abort(404)
-    
+        abort(404)    
     # Prevents deleting others articles
     if not payload.get('sub') == article.author:
         abort(400)
@@ -188,9 +185,9 @@ def post_new_comment(payload, article_id):
     if not comment_data:
         abort(400)
 
-    new_comment = Comment( article_id = article_id,
-                           content = comment_data,
-                           author = payload.get('sub') 
+    new_comment = Comment(article_id=article_id,
+                          content=comment_data,
+                          author=payload.get('sub') 
                          )
     
     try:
