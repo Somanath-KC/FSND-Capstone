@@ -26,25 +26,26 @@ Detailed information is available in the [API Reference](https://github.com/Soma
 
   ```sh
   ├── README.md
-  ├── app.py *** the main driver of the app. Includes your SQLAlchemy models.
-                    "python app.py" to run after installing dependences
-  ├── config.py *** Database URLs, CSRF generation, etc
-  ├── error.log
-  ├── forms.py *** Your forms
+  ├── test_api.py *** E-Magazine API test using python unittest module
+  ├── config.py *** Database URLs, etc
   ├── requirements.txt *** The dependencies we need to install with "pip3 install -r requirements.txt"
-  ├── static
-  │   ├── css 
-  │   ├── font
-  │   ├── ico
-  │   ├── img
-  │   └── js
-  └── templates
+  ├── Dockerfile *** Used to build docker images
+  ├── .gitignore 
+  ├── .dockerignore *** ignores secrets, unwanted file in build process.
+  └── src	
+      ├── api
+	  |   ├── __init__.py
+	  |   ├── controller.py *** The main driver of API which includes all endpoints.
+	  |   └── error.py API *** sepecific errors were handled by this script.
+      ├── auth
+      |   ├── __init__.py
+      |   └── handler.py *** Reponsible for verifing authorization and authentication of requests
       ├── errors
-      ├── forms
-      ├── layouts
-      └── pages
+      |   ├── __init__.py
+      |   └── handler.py *** Application level errros were handled here.
+      └── models
+          └── __init__.py ** Database models required for application were here.
   ```
-
 
 
 ## Setting up Authentication & Accessing live API
