@@ -54,7 +54,8 @@ Detailed information is available in the [API Reference](https://github.com/Soma
 
 ### Generating Tokens
 
-The front-end usually handles the token from the url fragment and stores it in the client-side on successful login, which will be used to authenticate API calls . 
+The front-end usually handles the token from the url fragment and stores it in the client-side on successful login, which will be used to authenticate API calls .
+
 **For our API testing purpose, we need to manually grab the token from url fragment.**
 +   Use login URL to authenticate
 +  Grab the token from url after successful authentication
