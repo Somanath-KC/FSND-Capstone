@@ -1,7 +1,8 @@
 import os
-from flask import Flask, request, abort, jsonify
+from flask import Flask, request, abort, jsonify, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
+from urllib import parse
 
 from .api.controller import API
 from .models import db, Article, Comment
@@ -35,6 +36,10 @@ def create_app(test_config=None):
     @app.route('/')
     def main():
         return "E-Magazine Site."
+
+    @app.route('/login')
+    def login_page_redirect():
+        return redirect(os.environ.get('AUTH0_LOGIN_URL'))
 
     return app
 
