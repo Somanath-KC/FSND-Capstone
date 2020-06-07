@@ -128,8 +128,8 @@ The API may return following of errors:
 ### Resource Endpoint Library
 Supported endpoints for Articles
 ```
-GET			'/articles'
-GET			'/articles/<article_id>'
+GET		'/articles'
+GET		'/articles/<article_id>'
 POST		'/articles'
 PATCH		'/articles'
 DELETE		'/articles/<article_id>'
@@ -137,7 +137,7 @@ DELETE		'/articles/<article_id>'
 
 Supported endpoints for Article Comments
 ```
-GET			'/articles/<int:article_id>/comments'
+GET		'/articles/<int:article_id>/comments'
 POST		'/articles/<int:article_id>/comments'
 DELETE		'/articles/<int:article_id>/comments'
 ```
@@ -156,17 +156,17 @@ GET	/articles
 
 {
 "Articles: [
-			{
-				"id": 5,
-				"publish_date_time": "Sat, 06 Jun 2020 10:26:24 GMT",
-				"title": "Testing Title"
-			},
-		   ],
+     	     {
+   	      "id": 5,
+ 	      "publish_date_time": "Sat, 06 Jun 2020 10:26:24 GMT",
+	      "title": "Testing Title"
+	     },
+	  ],
 "success":  true
 }
 ```
 
-GET		/articles/<article_id>
+GET	/articles/<article_id>
 
 -   Fetches the complete article matching the given id in URL.
 -   Request Arguments: None
@@ -177,15 +177,16 @@ Sample Output
 GET	/articles/<article_id>
 {
 "Articles: [
-			{
-				"id": 5,
-				"publish_date_time": "Sat, 06 Jun 2020 10:26:24 GMT",
-				"title": "Testing Title"
-			},
-		   ],
+	     {
+		"id": 5,
+		"publish_date_time": "Sat, 06 Jun 2020 10:26:24 GMT",
+		"title": "Testing Title"			
+	     },
+	   ],
 "success":  true
 }
 ```
+
 
 POST /articles
 
@@ -193,30 +194,38 @@ POST /articles
 -   Request Arguments: None
 -   Returns a JSON object with success value and Articles
 
+
 Sample Request Body
 ```
 {
 	"title": "New Title",
-	"content": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
+	"content": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its 		     layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to 		    using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web 			    page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web                       sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on   			    purpose (injected humour and the like)."
 }
 ```
+
 Sample Output
 ```
 POST /articles
 {
 
 "Articles": [
-				{
-					"author": "auth0|5edb85d556d0620013307ae7",
-					"content": "It is a long established fact that a reader 											will be distracted by the readable content of a page when looking at its 		layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
+		{
+		"author": "auth0|5edb85d556d0620013307ae7",
+		"content": "It is a long established fact that a reader 						
+			will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that 
+			it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look 
+			like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model 
+			text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved 
+			over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
 					"id": 94,
 					"publish_date_time": "Sun, 07 Jun 2020 19:33:49 GMT",
 					"title": "Newg Title"
-				}
-			],
+		 }
+	   ],
 "success": true
 }
 ```
+
 
 PATCH /articles
 
@@ -232,23 +241,25 @@ Sample Request Body
 	"content": "Updated Content"
 }
 ```
+
 Sample Output
 ```
 PATCH /articles
 {
 	"Articles": [
-					{
-						"author": "auth0|5edb85d556d0620013307ae7",
-						"content": "Updated Content",
-						"id": 15,
-						"publish_date_time": "Sun, 07 Jun 2020 05:07:17 GMT",
-						"title": "Test Title"
-					}
-				],
+			{
+			"author": "auth0|5edb85d556d0620013307ae7",
+			"content": "Updated Content",
+			"id": 15,
+			"publish_date_time": "Sun, 07 Jun 2020 05:07:17 GMT",
+			"title": "Test Title"
+			}
+	            ],
 	"success": true
 }
 ```
-DELETE /articles/<article_id>
+
+DELETE 	/articles/<article_id>
 
 -   Deletes the article matching given id in URL.
 -   Request Arguments: None
@@ -263,7 +274,7 @@ DELETE /articles/<article_id>
 }
 ```
 
-GET		/articles/<article_id>/comments
+GET	/articles/<article_id>/comments
 
 -   Fetches all the comments of article matching the given id in URL.
 -   Request Arguments: None
@@ -276,18 +287,18 @@ GET  /articles/<article_id>/comments
 	"Article": "Newg Title",
 	"Article_id": 11,
 	"comments": [
-					{
-						"author": "auth0|5edbc55ca36eb2001979b438",
-						"content": "This is a checking comment",
-						"date_time": "Sun, 07 Jun 2020 19:49:56 GMT",
-						"id": 21
-					}
-				],
+		      {
+			"author": "auth0|5edbc55ca36eb2001979b438",
+			"content": "This is a checking comment",
+			"date_time": "Sun, 07 Jun 2020 19:49:56 GMT",
+			"id": 21
+         	      }
+	  	   ],
 	"success": true
 }
 ```
 
-POST		/articles/<article_id>/comments
+POST	/articles/<article_id>/comments
 
 -   Post new in article matching the given id in URL.
 -   Request Arguments: None
@@ -306,13 +317,13 @@ POST  /articles/<article_id>/comments
 	"Article": "Newg Title",
 	"Article_id": 11,
 	"comments": [
-					{
-						"author": "auth0|5edbc55ca36eb2001979b438",
-						"content": "This is a checking comment",
-						"date_time": "Sun, 07 Jun 2020 19:49:56 GMT",
-						"id": 21
-					}
-				],
+			{
+ 			 "author": "auth0|5edbc55ca36eb2001979b438",
+ 			 "content": "This is a checking comment",
+			 "date_time": "Sun, 07 Jun 2020 19:49:56 GMT",
+			"id": 21
+			}
+		  ],
 	"success": true
 }
 ```
