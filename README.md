@@ -21,7 +21,6 @@ Detailed information is available in the [API Reference](https://github.com/Soma
 * **Auth0** as our auth service 
 * **Docker** for easy deployments
 * **Heroku** as our hosting platform
-
 ### Project Structure
 
   ```sh
@@ -34,19 +33,18 @@ Detailed information is available in the [API Reference](https://github.com/Soma
   ├── .dockerignore *** ignores secrets, unwanted file in build process.
   └── src	
       ├── api
-	  |   ├── __init__.py
-	  |   ├── controller.py *** The main driver of API which includes all endpoints.
-	  |   └── error.py API *** sepecific errors were handled by this script.
+	  │   ├── __init__.py
+	  │   ├── controller.py *** The main driver of API which includes all endpoints.
+	  │   └── error.py API *** sepecific errors were handled by this script.
       ├── auth
-      |   ├── __init__.py
-      |   └── handler.py *** Reponsible for verifing authorization and authentication of requests
+      │   ├── __init__.py
+      │   └── handler.py *** Reponsible for verifing authorization and authentication of requests
       ├── errors
-      |   ├── __init__.py
-      |   └── handler.py *** Application level errros were handled here.
-      └── models
-      |   └── __init__.py ** Database models required for application were here.
+      │   ├── __init__.py
+      │   └── handler.py *** Application level errros were handled here.
+      ├── models
+      │   └── __init__.py ** Database models required for application were here.
       └── __init__.py *** Acts as application factory for gunicorn server
-  ```
   ```
 
 
