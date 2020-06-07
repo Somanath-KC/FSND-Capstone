@@ -44,7 +44,9 @@ Detailed information is available in the [API Reference](https://github.com/Soma
       |   ├── __init__.py
       |   └── handler.py *** Application level errros were handled here.
       └── models
-          └── __init__.py ** Database models required for application were here.
+      |   └── __init__.py ** Database models required for application were here.
+      └── __init__.py *** Acts as application factory for gunicorn server
+  ```
   ```
 
 
