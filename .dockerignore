@@ -1,0 +1,9 @@
+.git
+.cache
+.gitignore
+venv/
+env_*
+test_*
+README.md
+__pycache__
+Dockerfile
