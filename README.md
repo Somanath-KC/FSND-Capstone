@@ -10,7 +10,7 @@ Roles handled by the API include:
 * Subscribers (Refers to the members who've subscribed to E-Magazine)
 * Authors (Refers to the members who publishes articles in E-Magazine)
 
-Detailed information is available in the API Reference section of this page.
+Detailed information is available in the [API Reference](https://github.com/Somanath-KC/FSND-Capstone/blob/master/README.md#api-refrence) section of this page.
 
 ### Tech Stack
 
