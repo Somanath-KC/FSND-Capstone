@@ -3,13 +3,14 @@ Capstone Project for Udacity's Full Stack Web Developer Nanodegree
 
 ## Overview
 
-This app is nearly complete. It is only missing one thing… real data! While the views and controllers are defined in this application, it is missing models and model interactions to be able to store retrieve, and update data from a database. By the end of this project, you should have a fully functioning site that is at least capable of doing the following, if not more, using a PostgreSQL database:
+E-Magazine, an application that enables people to share and acquire knowledge. This Magazine publishes various articles every day for its subscribers. E-Magazine also allows it's subscribers to share their views, opinions on the articles through comments. The E-Magazine API plays a crucial role in backing this application. This RESTful API  helps the application to create, update, read, and delete Articles and Comments in the database. This API also uses Role-Based Access Control for its users to avoid unauthorized actions. 
+Roles handled by the API include:
 
-* creating new venues, artists, and creating new shows.
-* searching for venues and artists.
-* learning more about a specific artist or venue.
+* Public  (Anyone without authorization, Usually general visitor)
+* Subscribers (Refers to the members who've subscribed to E-Magazine)
+* Authors (Refers to the members who publishes articles in E-Magazine)
 
-We want Fyyur to be the next new platform that artists and musical venues can use to find each other, and discover new music shows. Let's make that happen!
+Detailed information is available in the API Reference section of this page.
 
 ### Tech Stack
 
