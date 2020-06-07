@@ -3,6 +3,7 @@ Capstone Project for Udacity's Full Stack Web Developer Nanodegree
 
 ## Overview
 
+### Introduction
 E-Magazine, an application that enables people to share and acquire knowledge. This Magazine publishes various articles every day for its subscribers. E-Magazine also allows it's subscribers to share their views, opinions on the articles through comments. The E-Magazine API plays a crucial role in backing this application. This RESTful API  helps the application to create, update, read, and delete Articles and Comments in the database. This API also uses Role-Based Access Control for its users to avoid unauthorized actions. 
 Roles handled by the API include:
 
