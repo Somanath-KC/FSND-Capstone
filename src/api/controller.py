@@ -9,6 +9,7 @@ from . import errors
 
 # API END POINTS START
 
+
 # This endpoint checks api availability
 @API.route('/', methods=["GET"])
 def api_index():
@@ -23,7 +24,6 @@ def api_index():
 def get_articles():
 
     articles_data = [item.short() for item in Article.query.all()]
-
 
     return jsonify({
         'success': True,
@@ -71,13 +71,13 @@ def post_article(payload):
     return jsonify({
         'success': True,
         'Articles': [new_article.long()]
-    }), 201 
+    }), 201
 
 
 #  Update Article
 #  This endpoint updates the existing article
 #  REQUEST BODY: TYPE -> JSON
-#          REQUIRED -> id, content 
+#          REQUIRED -> id, content
 @API.route('/articles', methods=['PATCH'])
 @requires_auth('update:article')
 def update_article(payload):
@@ -86,8 +86,8 @@ def update_article(payload):
 
     article_id = data.get('id')
     article_new_content = data.get('content')
-    
-    # Checks if validity  of request body 
+
+    # Checks if validity  of request body
     if not (article_id and article_new_content):
         abort(400)
 
@@ -115,7 +115,7 @@ def update_article(payload):
         'success': True,
         'Articles': [article.long()]
     })
-    
+
 
 # Delete Article
 # Removes an article from database with given id
@@ -128,7 +128,7 @@ def delete_article(payload, article_id):
 
     # Checks if article exists with given id.
     if not article:
-        abort(404)    
+        abort(404)
     # Prevents deleting others articles
     if not payload.get('sub') == article.author:
         abort(400)
@@ -139,10 +139,11 @@ def delete_article(payload, article_id):
         print(e)
         db.session.rollback()
         abort(422)
-    
+
     return jsonify({
         'success': True
     })
+
 
 # GET COMMENTS
 # This returns all the comments for given article id
@@ -166,9 +167,10 @@ def read_comments_of_article(payload, article_id):
         'comments': [item.format() for item in comments]
     })
 
+
 #  POST COMMENT
 #       REQUIRES BODY --> JSON
-#       BODY --> {content: "Some text"}, 
+#       BODY --> {content: "Some text"},
 #       Returns all comments with new one.
 @API.route('/articles/<int:article_id>/comments', methods=["POST"])
 @requires_auth('post:comment')
@@ -187,9 +189,9 @@ def post_new_comment(payload, article_id):
 
     new_comment = Comment(article_id=article_id,
                           content=comment_data,
-                          author=payload.get('sub') 
-                         )
-    
+                          author=payload.get('sub')
+                          )
+
     try:
         new_comment.insert()
     except Exception as e:
@@ -197,7 +199,7 @@ def post_new_comment(payload, article_id):
         print(e)
         db.session.rollback()
         abort(422)
-    
+
     return jsonify({
         'success': True,
         'Article': article.title,
@@ -207,9 +209,9 @@ def post_new_comment(payload, article_id):
 
 
 #  DELETE COMMENT
-#       REQUIRE BODY --> JSON
-#       EXAMPLE BODY --> { 'id': 1 }, where id is comment id
-#       to be deleted    
+#  REQUIRE BODY --> JSON
+#  EXAMPLE BODY --> { 'id': 1 }, where id is comment id
+#  to be deleted
 @API.route('/articles/<int:article_id>/comments', methods=["DELETE"])
 @requires_auth('delete:comment')
 def delete_comment(payload, article_id):
@@ -224,7 +226,7 @@ def delete_comment(payload, article_id):
 
     # Prevents deleting other's comments
     if not (comment.author == payload.get('sub')):
-        # The author of article have right to delete any comment 
+        # The author of article have right to delete any comment
         # on his article only.
         if not ('delete:others-comment' in payload.get('permissions')):
             abort(400)

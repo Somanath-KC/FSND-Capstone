@@ -22,8 +22,12 @@ def create_app(test_config=None):
     # Add CORS headers
     @app.after_request
     def after_request(response):
-        response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,true')
-        response.headers.add('Access-Control-Allow-Methods', 'GET,PATCH,POST,DELETE,OPTIONS')
+        response.headers.add('Access-Control-Allow-Headers',
+                             'Content-Type,Authorization,true'
+                             )
+        response.headers.add('Access-Control-Allow-Methods',
+                             'GET,PATCH,POST,DELETE,OPTIONS'
+                             )
         return response
 
     app.register_blueprint(API, url_prefix='/api')
@@ -34,8 +38,12 @@ def create_app(test_config=None):
 
     return app
 
+
 APP = create_app()
+
+
 from .errors import handler
+
 
 if __name__ == '__main__':
     APP.run(host='0.0.0.0', port=8080, debug=True)

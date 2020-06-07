@@ -4,36 +4,42 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+
 class Article(db.Model):
     __tablename__ = "Article"
 
     id = Column(Integer, primary_key=True)
     author = Column(String(), nullable=False)
     title = Column(String(), nullable=False)
-    publish_date_time = Column(DateTime,  nullable=False, default=datetime.datetime.utcnow)
+    publish_date_time = Column(DateTime,
+                               nullable=False,
+                               default=datetime.datetime.utcnow
+                               )
     content = Column(String(),  nullable=False)
 
     # Relations ships one-many relation
-    comments = db.relationship('Comment', backref="Article", cascade="all,delete", lazy=True)
+    comments = db.relationship('Comment', backref="Article",
+                               cascade="all,delete", lazy=True
+                               )
 
     '''
     short()
         short form representation of the Article model
     '''
     def short(self):
-        
+
         return {
             'id': self.id,
             'title': self.title,
             'publish_date_time': self.publish_date_time
         }
-    
+
     '''
     long()
         long form representation of the Article model
     '''
     def long(self):
-        
+
         return {
             'id': self.id,
             'title': self.title,
@@ -41,8 +47,6 @@ class Article(db.Model):
             'author': self.author,
             'content': self.content
         }
-    
-    
 
     '''
     insert()
@@ -86,7 +90,9 @@ class Comment(db.Model):
     article_id = Column(Integer, ForeignKey('Article.id'), nullable=False)
     author = Column(String(), nullable=False)
     content = Column(String(256), nullable=False)
-    date_time = Column(DateTime, nullable=False, default=datetime.datetime.utcnow)
+    date_time = Column(DateTime, nullable=False,
+                       default=datetime.datetime.utcnow
+                       )
 
     '''
     format()
