@@ -1,5 +1,5 @@
 # FSND-Capstone | E-Magazine API
-Capstone Project for Udacity's Full Stack Web Developer Nanodegree
+Documentation for Udacity's Full Stack Web Developer Nanodegree Capstone Project.
 
 ## Overview
 
@@ -60,7 +60,7 @@ The front-end usually handles the token from the url fragment and stores it in t
 +   Use login URL to authenticate
 +  Grab the token from url after successful authentication
 
-[Click here](https://somanath-kc.auth0.com/authorize?audience=Emagazine&response_type=token&client_id=Dzo92uMPMyL7Ph3WeXz2F3v6bgOiSCu0&redirect_uri=https://e-magazine-fsnd-capstone.herokuapp.com/auth/) to redirect to external auth service (AUTH0) 
+[Click here](http://e-magazine-fsnd-capstone.herokuapp.com/login) to redirect to external auth service (AUTH0) 
 
 ### Tokens for project review
 
@@ -362,42 +362,60 @@ First,  make sure your machine statisifies below requirements and clone this rep
 + pip3
 + virtualenv
 + git
-```
-$ git clone https://github.com/Somanath-KC/FSND-Capstone.git
-$ cd FSND-Capstone
-```
++ postgres
+
 
 To start and run the local development server,
 
-1.  Initialize and activate a virtualenv:
+1.  Initial Setup
+```
+$ git clone https://github.com/Somanath-KC/FSND-Capstone.git
+$ cd FSND-Capstone
+$ createdb emagazine_fsnd *** This will be use by the app during development
+$ createdb test_emagazine_fsnd *** This will used by API test suite.
+```
+
+2. Setting up required environment variables file (file format for env_vars.sh) 
+```
+export DATABASE_URL=''
+export AUTH0_DOMAIN=''
+export ALGORITHMS=''
+export API_AUDIENCE=''
+export AUTH0_LOGIN_URL=''
+export TEST_DATABASE_URL=''
+export AUTHOR1_JWT=''
+export SUBSCRIBER_JWT=''
+```
+
+3.  Initialize and activate a virtualenv:
 
 ```
-$ cd YOUR_PROJECT_DIRECTORY_PATH/
 $ python3 -m virtualenv ./venv
 $ source venv/bin/activate
 
 ```
 
-2.  Install the dependencies and setting env variables:
+4.  Install the dependencies and exporting env variables:
 
 ```
-$ pip install -r requirements.txt
-$ source ./env_vars.sh # DB-URI,TOKENS, etc
-
-```
-
-3.  Run the development server:
-
-```
-$ export FLASK_APP=src
-$ export FLASK_ENV=development # enables debug mode
-$ flask run
+(venv) $ pip install -r requirements.txt
+(venv) $ source ./env_vars.sh # Contains DB-URI,TOKENS, etc
 
 ```
 
-4.  Accessing Application
+5.  Run the development server:
+
+```
+(venv) $ export FLASK_APP=src
+(venv) $ export FLASK_ENV=development # enables debug mode
+(venv) $ flask run
+
+```
+
+6.  Accessing Application
 + Navigate to Home page  [http://localhost:5000](http://localhost:5000/)
 + Accessing API Base URL [http://localhost:5000/api](http://localhost:5000/api) 
+
 
 ### Running API Locally
 To easily run the app locally
@@ -460,11 +478,28 @@ Deployment Instructions
 6. Hurray! Now you can now access your app using heroku application URL.
 
 
+
+
 ## Testing
 
 ### Python Unittest Module
+
+*Development setup for this project is mandatory to run test suite.* 
+Make sure you have successfully completed the development setup for this app from [this section](https://github.com/Somanath-KC/FSND-Capstone/blob/master/README.md#development-setup)
+
+Running API test suite.
+ ```
+(venv) $ python test_api.py
+ ```
+
 ### Postman Application
+To make things easy. I've included postman collection json file which is configured with the API base url and auth tokens present in the [project review tokens](https://github.com/Somanath-KC/FSND-Capstone/blob/master/README.md#tokens-for-project-review) section. This collection contains all api endpoints mentioned in [Resource Endpoint Library](https://github.com/Somanath-KC/FSND-Capstone/blob/master/README.md#resource-endpoint-library). 
+
+Running Postman Collection
+* export the **emagazine_fsnd_collection.json** to postman.
+
 
 
 ## Acknowledgements
-_github.com/amyhua, _github.com/grutt, _github.com/cmccarthy15, _github.com/kbehrman
+A Big thanks to [@amyhua](https://github.com/amyhua), [@grutt](https://github.com/grutt), [@cmccarthy15](https://github.com/cmccarthy15), [@kbehrman](https://github.com/kbehrman) and [@Udacity](https://www.udacity.com/) for this amzaing [FSND course](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd0044). I also thank my technical mentors and project reviewers for the support.
+
