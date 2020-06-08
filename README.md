@@ -355,11 +355,108 @@ DELETE /articles/<article_id>/comments
 ## Local Development & Hosting Instructions
 
 ### Development Setup
+First,  make sure your machine statisifies below requirements and clone this repo.
+**Requirements**
++ Python3
++ pip3
++ virtualenv
++ git
+```
+$ git clone https://github.com/Somanath-KC/FSND-Capstone.git
+$ cd FSND-Capstone
+```
+
+To start and run the local development server,
+
+1.  Initialize and activate a virtualenv:
+
+```
+$ cd YOUR_PROJECT_DIRECTORY_PATH/
+$ python3 -m virtualenv ./venv
+$ source venv/bin/activate
+
+```
+
+2.  Install the dependencies and setting env variables:
+
+```
+$ pip install -r requirements.txt
+$ source ./env_vars.sh # DB-URI,TOKENS, etc
+
+```
+
+3.  Run the development server:
+
+```
+$ export FLASK_APP=src
+$ export FLASK_ENV=development # enables debug mode
+$ flask run
+
+```
+
+4.  Accessing Application
++ Navigate to Home page  [http://localhost:5000](http://localhost:5000/)
++ Accessing API Base URL [http://localhost:5000/api](http://localhost:5000/api) 
 
 ### Running API Locally
+To easily run the app locally
+
+ 1. Make sure below env variables were present in evn_docker file and docker installed on your machine.
+ ```
+ DATABASE_URL=VAL
+ PORT=5000
+ AUTH0_DOMAIN=VAL
+ ALGORITHMS=VAL
+ API_AUDIENCE=VAL
+ AUTH0_LOGIN_URL=VAL
+ ```
+ 2. Running the app
+ ```
+ docker pull somanathkc/fsnd_capstone
+ docker run --env-file env_docker -p 5000:5000 somanathkc/fsnd_capstone
+ ```
 
 ### Heroku Deployment
+Usually Heroku supports deployment usnig git and container registry. For this project we'll be using container registry method for smoother deployments.
 
+Before starting up setup the below env variables in your heroku app through dashboard or cli
+```
+ AUTH0_DOMAIN=VAL
+ ALGORITHMS=VAL
+ API_AUDIENCE=VAL
+ AUTH0_LOGIN_URL=VAL
+```
+**Note: PORT and DATABASE_URL env variable were taken care by heroku.**
+
+You must have Docker set up locally to continue. You should see output when you run this command.
+```
+$ docker ps
+```
+Deployment Instructions
+ 1. Download and install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command-line).
+ 2.  Login in to heroku cli
+	 ```
+	 $ heroku login
+	 ```
+3. Log in to Container Registry
+	```
+	$ heroku container:login
+	```
+4.  Push your Docker-based app
+	
+	Build the Dockerfile in the current directory and push the Docker image.
+	```
+	$ heroku container:push web
+	```
+
+5. Deploy the changes
+	
+	Release the newly pushed images to deploy your app.
+	```
+	$ heroku container:release web
+	$ heroku ps:scale web=1
+	```
+6. Hurray! Now you can now access your app using heroku application URL.
 
 
 ## Testing
