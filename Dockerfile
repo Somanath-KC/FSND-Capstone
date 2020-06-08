@@ -11,5 +11,4 @@ RUN \
  python3 -m pip install -r requirements.txt --no-cache-dir && \
  apk --purge del .build-deps
 
-EXPOSE 8080
 CMD gunicorn src:APP --bind 0.0.0.0:$PORT --reload
