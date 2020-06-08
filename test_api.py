@@ -17,7 +17,7 @@ class EmagazineAPITestCase(unittest.TestCase):
         """Define test variables and initialize app."""
         self.app = APP
         self.client = self.app.test_client
-        self.app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get('DATABASE_URL')
+        self.app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get('TEST_DATABASE_URL')
         self.app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
         # binds the app to the current context
