@@ -16,6 +16,7 @@ def create_app(test_config=None):
     # Databse initialization
     db.app = app
     db.init_app(app)
+    db.create_all()
 
     # CORS Configuration
     cors = CORS(app, resources={r"*": {"origin": "*"}})
