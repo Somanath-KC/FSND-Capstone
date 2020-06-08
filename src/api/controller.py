@@ -221,7 +221,7 @@ def delete_comment(payload, article_id):
     comment = Comment.query.get(comment_id)
 
     # if passed invalid article and comment id returns 404
-    if not (article and comment):
+    if not ((article and comment) and (article_id == comment.article_id)):
         abort(404)
 
     # Prevents deleting other's comments
