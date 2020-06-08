@@ -4,7 +4,7 @@ import json
 from flask_sqlalchemy import SQLAlchemy
 
 from src import APP
-from src.models import Article, Comment
+from src.models import Article, Comment, db
 
 author1_jwt = os.environ.get('AUTHOR1_JWT')
 subscriber_jwt = os.environ.get('SUBSCRIBER_JWT')
@@ -22,9 +22,10 @@ class EmagazineAPITestCase(unittest.TestCase):
 
         # binds the app to the current context
         with self.app.app_context():
-            self.db = SQLAlchemy()
+            self.db = db
             self.db.init_app(self.app)
             # create all tables
+            self.db.drop_all()
             self.db.create_all()
 
     def tearDown(self):
@@ -37,7 +38,6 @@ class EmagazineAPITestCase(unittest.TestCase):
 
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data.get('success'), True)
-        self.assertTrue(data.get('Articles'))
 
     def test_api_invalid_endpoint(self):
         res = self.client().get('/api/fasdl')
@@ -46,10 +46,31 @@ class EmagazineAPITestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 404)
         self.assertEqual(data.get('success'), False)
 
+    def test_post_new_article_by_author(self):
+        # Using author's jwt for testing
+        # Only authors can post articles in magazine
+        headers = {"Authorization": "Bearer {}".format(author1_jwt)}
+        content = {"title": "Test Title", 
+                   "content": "Content of Article goes here."
+                   }
+        res = self.client().post('/api/articles', headers=headers, json=content)
+        data = res.get_json()
+
+        self.assertEqual(res.status_code, 201)
+        self.assertTrue(data.get('success'))
+        self.assertTrue(data.get('Articles'))
+
     def test_get_article_by_id_with_auth(self):
         # Using subscriber jwt for RBAC testing
+        # For testing purpose here we are inserting a new article
+        post_headers = {"Authorization": "Bearer {}".format(author1_jwt)}
+        post_content = {"title": "Test Title", "content": "Content of Article goes here."}
+        post_res = self.client().post('/api/articles', headers=post_headers, json=post_content)
+        post_data = post_res.get_json()
+
+        article_id = post_data.get('Articles')[0].get('id')
         headers = {"Authorization": "Bearer {}".format(subscriber_jwt)}
-        res = self.client().get('/api/articles/3', headers=headers)
+        res = self.client().get('/api/articles/{}'.format(article_id), headers=headers)
         data = res.get_json()
 
         self.assertEqual(res.status_code, 200)
@@ -59,7 +80,14 @@ class EmagazineAPITestCase(unittest.TestCase):
     def test_get_article_by_id_without_auth(self):
         # RBAC testing without auth header
         # Only Subscribers can read the articles
-        res = self.client().get('/api/articles/3')
+        # For testing purpose here we are inserting a new article
+        post_headers = {"Authorization": "Bearer {}".format(author1_jwt)}
+        post_content = {"title": "Test Title", "content": "Content of Article goes here."}
+        post_res = self.client().post('/api/articles', headers=post_headers, json=post_content)
+        post_data = post_res.get_json()
+
+        article_id = post_data.get('Articles')[0].get('id')
+        res = self.client().get('/api/articles/{}'.format(article_id))
         data = res.get_json()
 
         self.assertEqual(res.status_code, 401)
@@ -75,20 +103,6 @@ class EmagazineAPITestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 404)
         self.assertEqual(data.get('success'), False)
         self.assertFalse(data.get('Articles'))
-
-    def test_post_new_article_by_author(self):
-        # Using author's jwt for testing
-        # Only authors can post articles in magazine
-        headers = {"Authorization": "Bearer {}".format(author1_jwt)}
-        content = {"title": "Test Title", 
-                   "content": "Content of Article goes here."
-                   }
-        res = self.client().post('/api/articles', headers=headers, json=content)
-        data = res.get_json()
-
-        self.assertEqual(res.status_code, 201)
-        self.assertTrue(data.get('success'))
-        self.assertTrue(data.get('Articles'))
 
     def test_post_new_article_by_subscriber(self):
         # Using subscirber's jwt for RBAC testing
@@ -107,8 +121,15 @@ class EmagazineAPITestCase(unittest.TestCase):
     def test_update_article_by_author(self):
         # Using author's jwt for RBAC testing
         # Only authors can update articles in magazine
+        # For testing purpose here we are inserting a new article
+        post_headers = {"Authorization": "Bearer {}".format(author1_jwt)}
+        post_content = {"title": "Test Title", "content": "Content of Article goes here."}
+        post_res = self.client().post('/api/articles', headers=post_headers, json=post_content)
+        post_data = post_res.get_json()
+
+        article_id = post_data.get('Articles')[0].get('id')
         headers = {"Authorization": "Bearer {}".format(author1_jwt)}
-        content = {"id": 10, "content": "Content of Article goes here."}
+        content = {"id": article_id, "content": "Updated Content of Article goes here."}
         res = self.client().patch('/api/articles', headers=headers, json=content)
         data = res.get_json()
 
@@ -177,7 +198,24 @@ class EmagazineAPITestCase(unittest.TestCase):
         self.assertFalse(data.get('success'))
 
     def test_get_comments_by_subscriber(self):
-        article_id = 3
+        post_headers = {"Authorization": "Bearer {}".format(author1_jwt)}
+        post_content = {"title": "Test Title", "content": "Content of Article goes here."}
+        post_res = self.client().post('/api/articles',
+                                      headers=post_headers,
+                                      json=post_content
+                                      )
+        post_data = post_res.get_json()
+
+        # Here Subcriber is posting the comment
+        post_article_id = post_data.get('Articles')[0].get('id')
+        post_headers = {"Authorization": "Bearer {}".format(subscriber_jwt)}
+        post_content = {"content": "This is a testing comment"}
+        post_res = self.client().post('/api/articles/{}/comments'.format(post_article_id),
+                                      headers=post_headers, json=post_content
+                                      )
+        post_data = post_res.get_json()
+
+        article_id = post_data.get('Article_id')
         headers = {"Authorization": "Bearer {}".format(subscriber_jwt)}
         res = self.client().get('/api/articles/{}/comments'.format(article_id), headers=headers)
         data = res.get_json()
@@ -198,8 +236,9 @@ class EmagazineAPITestCase(unittest.TestCase):
                                       )
         post_data = post_res.get_json()
 
+        # Here Subcriber is posting the comment
         article_id = post_data.get('Articles')[0].get('id')
-        headers = {"Authorization": "Bearer {}".format(author1_jwt)}
+        headers = {"Authorization": "Bearer {}".format(subscriber_jwt)}
         content = {"content": "This is a testing comment"}
         res = self.client().post('/api/articles/{}/comments'.format(article_id),
                                  headers=headers,
