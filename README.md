@@ -362,31 +362,48 @@ First,  make sure your machine statisifies below requirements and clone this rep
 + pip3
 + virtualenv
 + git
-```
-$ git clone https://github.com/Somanath-KC/FSND-Capstone.git
-$ cd FSND-Capstone
-```
++ postgres
+
 
 To start and run the local development server,
 
-1.  Initialize and activate a virtualenv:
+1.  Initial Setup
+```
+$ git clone https://github.com/Somanath-KC/FSND-Capstone.git
+$ cd FSND-Capstone
+$ createdb emagazine_fsnd *** This will be use by the app during development
+$ createdb test_emagazine_fsnd *** This will used by API test suite.
+```
+
+2. Setting up required environment variables file (file format for env_vars.sh) 
+```
+export DATABASE_URL=''
+export AUTH0_DOMAIN=''
+export ALGORITHMS=''
+export API_AUDIENCE=''
+export AUTH0_LOGIN_URL=''
+export TEST_DATABASE_URL=''
+export AUTHOR1_JWT=''
+export SUBSCRIBER_JWT=''
+```
+
+3.  Initialize and activate a virtualenv:
 
 ```
-$ cd YOUR_PROJECT_DIRECTORY_PATH/
 $ python3 -m virtualenv ./venv
 $ source venv/bin/activate
 
 ```
 
-2.  Install the dependencies and setting env variables:
+4.  Install the dependencies and exporting env variables:
 
 ```
 $ pip install -r requirements.txt
-$ source ./env_vars.sh # DB-URI,TOKENS, etc
+$ source ./env_vars.sh # Contains DB-URI,TOKENS, etc
 
 ```
 
-3.  Run the development server:
+5.  Run the development server:
 
 ```
 $ export FLASK_APP=src
@@ -395,9 +412,10 @@ $ flask run
 
 ```
 
-4.  Accessing Application
+6.  Accessing Application
 + Navigate to Home page  [http://localhost:5000](http://localhost:5000/)
 + Accessing API Base URL [http://localhost:5000/api](http://localhost:5000/api) 
+
 
 ### Running API Locally
 To easily run the app locally
