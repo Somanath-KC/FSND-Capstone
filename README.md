@@ -478,11 +478,28 @@ Deployment Instructions
 6. Hurray! Now you can now access your app using heroku application URL.
 
 
+
+
 ## Testing
 
 ### Python Unittest Module
+
+*Development setup for this project is mandatory to run test suite.* 
+Make sure you have successfully completed the development setup for this app from [this section](https://github.com/Somanath-KC/FSND-Capstone/blob/master/README.md#development-setup)
+
+Running API test suite.
+ ```
+(venv) $ python test_api.py
+ ```
+
 ### Postman Application
+To make things easy. I've included postman collection json file which is configured with the API base url and auth tokens present in the [project review tokens](https://github.com/Somanath-KC/FSND-Capstone/blob/master/README.md#tokens-for-project-review) section. This collection contains all api endpoints mentioned in [Resource Endpoint Library](https://github.com/Somanath-KC/FSND-Capstone/blob/master/README.md#resource-endpoint-library). 
+
+Running Postman Collection
+* export the **emagazine_fsnd_collection.json** to postman.
+
 
 
 ## Acknowledgements
-_github.com/amyhua, _github.com/grutt, _github.com/cmccarthy15, _github.com/kbehrman
+A Big thanks to [@amyhua](https://github.com/amyhua), [@grutt](https://github.com/grutt), [@cmccarthy15](https://github.com/cmccarthy15), [@kbehrman](https://github.com/kbehrman) and [@Udacity](https://www.udacity.com/) for this amzaing [FSND course](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd0044). I also thank my technical mentors and project reviewers for the support.
+
