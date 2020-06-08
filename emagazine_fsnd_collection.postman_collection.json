@@ -1,0 +1,620 @@
+{
+	"info": {
+		"_postman_id": "40642b67-4ff1-4f17-9524-69bf11a7c953",
+		"name": "FSND_CAPSTONE_E_MAGAZINE",
+		"description": "E-Magazine API Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Public",
+			"item": [
+				{
+					"name": "Articles",
+					"item": [
+						{
+							"name": "READ TITLES",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{remote_api_base_url}}/articles",
+									"host": [
+										"{{remote_api_base_url}}"
+									],
+									"path": [
+										"articles"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Subscribers",
+			"item": [
+				{
+					"name": "Articles",
+					"item": [
+						{
+							"name": "READ TITLES",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{remote_api_base_url}}/articles",
+									"host": [
+										"{{remote_api_base_url}}"
+									],
+									"path": [
+										"articles"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "READ",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{remote_api_base_url}}/articles/1",
+									"host": [
+										"{{remote_api_base_url}}"
+									],
+									"path": [
+										"articles",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CREATE",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"title\": \"Contrary to popular belief\",\n\t\"content\": \"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{remote_api_base_url}}/articles",
+									"host": [
+										"{{remote_api_base_url}}"
+									],
+									"path": [
+										"articles"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPDATE",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"id\": 1,\n\t\"content\": \"New Updated Content\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{remote_api_base_url}}/articles",
+									"host": [
+										"{{remote_api_base_url}}"
+									],
+									"path": [
+										"articles"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{remote_api_base_url}}/articles/4",
+									"host": [
+										"{{remote_api_base_url}}"
+									],
+									"path": [
+										"articles",
+										"4"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "72eb6937-53b1-4b5f-9d93-182a6947e3b2",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "573294e9-4ee7-4804-9387-53a0a8ad8566",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Comments",
+					"item": [
+						{
+							"name": "READ",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{remote_api_base_url}}/articles/2/comments",
+									"host": [
+										"{{remote_api_base_url}}"
+									],
+									"path": [
+										"articles",
+										"2",
+										"comments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CREATE",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"content\": \"You need to be sure there isn't anything embarrassing hidden in the middle of text.\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{remote_api_base_url}}/articles/5/comments",
+									"host": [
+										"{{remote_api_base_url}}"
+									],
+									"path": [
+										"articles",
+										"5",
+										"comments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"id\": 3\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{remote_api_base_url}}/articles/2/comments",
+									"host": [
+										"{{remote_api_base_url}}"
+									],
+									"path": [
+										"articles",
+										"2",
+										"comments"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "43b2dc86-6ae9-40ab-85d9-9e85dddb7db8",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "3e710763-e299-4670-95f9-d9b76a2d301e",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlRzT1dpbWQxTENEWDFiamlPekQtZSJ9.eyJpc3MiOiJodHRwczovL3NvbWFuYXRoLWtjLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWRiYzU1Y2EzNmViMjAwMTk3OWI0MzgiLCJhdWQiOiJFbWFnYXppbmUiLCJpYXQiOjE1OTE1NTgyODksImV4cCI6MTU5MTY0NDY4OSwiYXpwIjoiRHpvOTJ1TVBNeUw3UGgzV2VYejJGM3Y2YmdPaVNDdTAiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTpjb21tZW50IiwicG9zdDpjb21tZW50IiwicmVhZDphcnRpY2xlIiwicmVhZDpjb21tZW50Il19.Z0eRXkMQaGCxNMwvf0-ey-le3rXSlSeIQqr4O7LDORGsEBY7VjvPupuuFKowsQOLCniTy_8Fme5eMCnkfGBV85Q_q7euPlU7-Jv0K5UO8mY1dM0wmSztRaKSMnxRyosZoVOtEesm5Xk6AJL-l0qB7pcJqLwZO-dn73dusUA2q_mZB-wTnuy6s12AYEAlPwjbiNA4mfPQIkcW-xWmgm-RLBplHgXa2yQhqGgn2uXJSWp5BIRMFMfnQq9-tsJMK5Gf_Hs_LLaxrEJBGzUVVTDAm5nOjdnV3uf5FcTRX67jvW844L_gRyvXgawBAIXIW37Bmct83YJqkaUFySQ3yy-f8w",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "325e79f4-a691-44b3-b9f1-48e8ab00c174",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "6916d5eb-3b85-4d8b-bed2-5cc9048f72e9",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Authors",
+			"item": [
+				{
+					"name": "Articles",
+					"item": [
+						{
+							"name": "READ",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{remote_api_base_url}}/articles/3",
+									"host": [
+										"{{remote_api_base_url}}"
+									],
+									"path": [
+										"articles",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CREATE",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"title\": \"Undoubtable source\",\n\t\"content\": \"making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{remote_api_base_url}}/articles",
+									"host": [
+										"{{remote_api_base_url}}"
+									],
+									"path": [
+										"articles"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPDATE",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"id\": 1,\n\t\"content\": \"Updated Content\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{remote_api_base_url}}/articles",
+									"host": [
+										"{{remote_api_base_url}}"
+									],
+									"path": [
+										"articles"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{remote_api_base_url}}/articles/4",
+									"host": [
+										"{{remote_api_base_url}}"
+									],
+									"path": [
+										"articles",
+										"4"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "23dccda2-7a5e-423b-9c2c-8c0f5334728c",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "cfbf7550-a5a0-4697-b417-858bbca26047",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Comments",
+					"item": [
+						{
+							"name": "READ",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{remote_api_base_url}}/articles/1/comments",
+									"host": [
+										"{{remote_api_base_url}}"
+									],
+									"path": [
+										"articles",
+										"1",
+										"comments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CREATE",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"content\": \"This is a author comment\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{remote_api_base_url}}/articles/2/comments",
+									"host": [
+										"{{remote_api_base_url}}"
+									],
+									"path": [
+										"articles",
+										"2",
+										"comments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"id\": 14\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{remote_api_base_url}}/articles/5/comments",
+									"host": [
+										"{{remote_api_base_url}}"
+									],
+									"path": [
+										"articles",
+										"5",
+										"comments"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "2067f975-5bf7-45fc-a561-c43ef19b49c1",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "e864d98f-ea95-4091-8297-9a02a8899ce3",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlRzT1dpbWQxTENEWDFiamlPekQtZSJ9.eyJpc3MiOiJodHRwczovL3NvbWFuYXRoLWtjLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWRiODVkNTU2ZDA2MjAwMTMzMDdhZTciLCJhdWQiOiJFbWFnYXppbmUiLCJpYXQiOjE1OTE1NTg0MDIsImV4cCI6MTU5MTY0NDgwMiwiYXpwIjoiRHpvOTJ1TVBNeUw3UGgzV2VYejJGM3Y2YmdPaVNDdTAiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphcnRpY2xlIiwiZGVsZXRlOmNvbW1lbnQiLCJkZWxldGU6b3RoZXJzLWNvbW1lbnQiLCJwb3N0OmFydGljbGUiLCJwb3N0OmNvbW1lbnQiLCJyZWFkOmFydGljbGUiLCJyZWFkOmNvbW1lbnQiLCJ1cGRhdGU6YXJ0aWNsZSJdfQ.sfO4dX-3TuyOfQ834hmRmtg_stMG95S-BI1yiyQa8aaCogh1dJ7T5otmUouMr_9CwePeXMtVtOMMV9_Wq3m3pj02Ob-HYyjKi9HEH5mRBqqvLkFyOU6VL-vXsKYNdg6nVDGO72DVZ6Il6VN7nQGfbf2lO7pjLPztnNIqcUS7TFv-zLaC-kgNuOoWtDoe-dcPwhzyTukaYg7-w8RTiQTgvhf8tHPTaj7eTbmvVZFGPp4kPxwIrdWt06458q_hYlR4saqsqeohRmi5emuF07UarbWNrkfonXUekHVJfAZ31MUK-tsqXvVIYjYQ5eXVh0zjkmM9fdOD5UrtNXtCnea-fg",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "db57068b-33d2-4e2d-b877-9b32a596cd34",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "57077377-7a30-410c-8f6e-a0b0235eaaae",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "API REACH",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{remote_api_base_url}}",
+					"host": [
+						"{{remote_api_base_url}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "2f9d3c95-c6ef-4c07-b4c2-39fd68a5dcd0",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "5ee57234-d96c-4212-b80e-15a54f2aa28a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "a24c184c-55aa-4733-917e-ac3dfbdf6eae",
+			"key": "remote_api_base_url",
+			"value": "http://e-magazine-fsnd-capstone.herokuapp.com/api",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
