@@ -60,7 +60,7 @@ The front-end usually handles the token from the url fragment and stores it in t
 +   Use login URL to authenticate
 +  Grab the token from url after successful authentication
 
-[Click here](https://somanath-kc.auth0.com/authorize?audience=Emagazine&response_type=token&client_id=Dzo92uMPMyL7Ph3WeXz2F3v6bgOiSCu0&redirect_uri=https://e-magazine-fsnd-capstone.herokuapp.com/auth/) to redirect to external auth service (AUTH0) 
+[Click here](http://e-magazine-fsnd-capstone.herokuapp.com/login) to redirect to external auth service (AUTH0) 
 
 ### Tokens for project review
 
