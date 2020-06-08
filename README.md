@@ -399,7 +399,7 @@ $ source venv/bin/activate
 
 ```
 (venv) $ pip install -r requirements.txt
-(venv) $ source ./env_vars.sh # Contains DB-URI,TOKENS, etc
+(venv) $ source ./env_vars.sh
 
 ```
 
@@ -407,8 +407,7 @@ $ source venv/bin/activate
 
 ```
 (venv) $ export FLASK_APP=src
-(venv) $ export FLASK_ENV=development # enables debug mode
-(venv) $ flask run
+(venv) $ flask run --reload
 
 ```
 
