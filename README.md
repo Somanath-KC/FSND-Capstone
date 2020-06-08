@@ -398,17 +398,17 @@ $ source venv/bin/activate
 4.  Install the dependencies and exporting env variables:
 
 ```
-$ pip install -r requirements.txt
-$ source ./env_vars.sh # Contains DB-URI,TOKENS, etc
+(venv) $ pip install -r requirements.txt
+(venv) $ source ./env_vars.sh # Contains DB-URI,TOKENS, etc
 
 ```
 
 5.  Run the development server:
 
 ```
-$ export FLASK_APP=src
-$ export FLASK_ENV=development # enables debug mode
-$ flask run
+(venv) $ export FLASK_APP=src
+(venv) $ export FLASK_ENV=development # enables debug mode
+(venv) $ flask run
 
 ```
 
